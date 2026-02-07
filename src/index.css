@@ -11,6 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --font-family: "Montserrat", sans-serif;
+  --second-family: "Montserrat Alternates", sans-serif;
 }
 
 a {
@@ -67,6 +69,14 @@ button:focus-visible {
     max-width: 569px;
   }
 }
+
+@media screen and (max-width: 480px) {
+  .container {
+    width: 100%;
+    max-width: 293px;
+  }
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

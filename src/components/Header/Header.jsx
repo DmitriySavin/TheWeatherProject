@@ -12,26 +12,34 @@ export default function Header() {
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit() {
     setIsSubmitted(true);
     setIsModalOpen(false);
+  }
+
+  function closeMenu() {
+    setMenuVisible(false); // запускає анімацію зникнення
+    setTimeout(() => setIsBurgerOpen(false), 400); // видаляємо меню після анімації
   }
 
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
         setIsModalOpen(false);
+        closeMenu();
       }
     }
 
     document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  function openMenu() {
+    setIsBurgerOpen(true);
+    setTimeout(() => setMenuVisible(true), 10); // щоб запустити анімацію
+  }
 
   return (
     <header className={s.header}>
@@ -74,37 +82,48 @@ export default function Header() {
             )}
             <img src={user} alt="User" className={s.userImg} />
           </div>
+
           <button
             className={s.burgerBtn}
-            onClick={() => setIsBurgerOpen((prev) => !prev)}
+            onClick={isBurgerOpen ? closeMenu : openMenu}
           >
             {isBurgerOpen ? (
-              <svg width="6" height="10" viewBox="0 0 6 10">
+              <svg
+                width="6"
+                height="10"
+                viewBox="0 0 6 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M0.5 8.98L4.74 4.74 0.5 0.5"
+                  d="M0.5 8.98529L4.74264 4.74265L0.5 0.500009"
                   stroke="black"
-                  strokeLinecap="round"
+                  stroke-linecap="round"
                 />
               </svg>
             ) : (
-              <svg width="10" height="6" viewBox="0 0 10 6">
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M0.5 0.5L4.74 4.74 8.98 0.5"
+                  d="M0.5 0.5L4.74264 4.74264L8.98528 0.5"
                   stroke="black"
-                  strokeLinecap="round"
+                  stroke-linecap="round"
                 />
               </svg>
             )}
           </button>
         </div>
       </div>
+
       {isBurgerOpen && (
-        <div className={s.menu}>
+        <div className={`${s.menu} ${menuVisible ? s.menuVisible : ""}`}>
           <div className={s.menuHead}>
-            <button
-              className={s.closeBtn}
-              onClick={() => setIsBurgerOpen(false)}
-            >
+            <button className={s.closeBtn} onClick={closeMenu}>
               <IoMdClose style={{ color: "black" }} />
             </button>
 
@@ -126,15 +145,16 @@ export default function Header() {
               </li>
             </ul>
           </div>
+
           <div className={s.menuFooter}>
             {isSubmitted ? (
-              <h5 className={s.name}>Welcome, {username}</h5>
+              <h5 className={s.menuName}>Welcome, {username}</h5>
             ) : (
               <button
                 className={s.menuSignUpBtn}
                 onClick={() => {
                   setIsModalOpen(true);
-                  setIsBurgerOpen(false);
+                  closeMenu();
                 }}
               >
                 Sign Up

@@ -28,6 +28,7 @@
 }
 
 .link {
+  font-family: var(--second-family);
   font-size: 12px;
   font-weight: 500;
   color: #000;
@@ -41,6 +42,7 @@
 }
 
 .signUpBtn {
+  font-family: var(--second-family);
   background: #ffb36c;
   border: none;
   border-radius: 10px;
@@ -48,9 +50,24 @@
   cursor: pointer;
   font-size: 12px;
   color: #000;
+  transition: transform 0.3s ease;
+  transition-delay: 0.2s;
+}
+
+.signUpBtn:hover,
+.signUpBtn:focus,
+.signUpBtn:active {
+  border: none;
+  outline: none;
+}
+
+.signUpBtn:hover {
+  transform: scale(1.1);
 }
 
 .name {
+  font-family: var(--font-family);
+  font-size: 14px;
   color: #000;
   font-weight: 500;
 }
@@ -118,8 +135,8 @@
 
 @media screen and (max-width: 768px) {
   .header {
-    max-width: 2500px;
-    padding: 15px 40px;
+    max-width: 100%; /* замість 2500px */
+    padding: 15px 20px; /* зменшити, щоб не тисло на контент */
   }
 
   .logo {
@@ -136,7 +153,7 @@
   }
 
   .name {
-    font-size: 14px;
+    font-size: 8px;
   }
 
   .userImg {
@@ -149,15 +166,16 @@
   .signUpBtn {
     padding: 8px 16px;
     font-size: 8px;
-    width: 63px;
+    width: 65px;
   }
 
   .name {
-    font-size: 12px;
+    font-size: 8px;
   }
 
   .headerList {
     gap: 25px;
+    align-items: center;
   }
 }
 
@@ -197,17 +215,29 @@
     height: 40px;
   }
 
-  .menu {
-    display: flex;
-    gap: 156px;
-    justify-content: center;
-  }
+.menu {
+  opacity: 0;
+  height: 100vh;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.menuVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
   .menuList {
     width: 64px;
   }
 
   .name {
-    text-align: center;
+    display: none;
+  }
+
+  .menuName {
+    font-size: 10px;
+    color: #000;
   }
 }
+
