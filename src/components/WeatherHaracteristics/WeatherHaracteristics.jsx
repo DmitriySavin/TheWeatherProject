@@ -1,4 +1,5 @@
 import styles from "./WeatherHaracteristics.module.css";
+import { FaTemperatureHigh } from "react-icons/fa";
 
 export const WeatherHaracteristics = () => {
   return (
@@ -7,9 +8,7 @@ export const WeatherHaracteristics = () => {
         <li key={"#"} className={styles.item}>
           <p className={styles.itemTitle}>Feels like</p>
           <p className={styles.itemText}>30.0°C</p>
-          <svg className={styles.icon}>
-            <use></use>
-          </svg>
+          <FaTemperatureHigh/>
         </li>
         <li key={"#"} className={styles.item}>
           <p className={styles.itemTitle}>Min °C</p>
