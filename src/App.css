@@ -106,7 +106,7 @@ legend {
   display: block;
 }
 
-input[type='file'] {
+input[type="file"] {
   max-width: 100%;
 }
 
@@ -117,4 +117,30 @@ input[type='file'] {
   margin-right: auto;
   padding-left: 15px;
   padding-right: 15px;
-} 
+}
+
+.container {
+  width: 100%;
+  max-width: 293px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: 569px;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .container {
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+}
+
+/* .container {
+  width: 100%;
+  max-width: 293px;
+} */
