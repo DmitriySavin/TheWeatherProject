@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <header className={s.header}>
-      <div className="container">
+      <div>
         <div className={s.headerContainer}>
           <a href="#">
             <img src={logo} alt="Forecast" className={s.logo} />
