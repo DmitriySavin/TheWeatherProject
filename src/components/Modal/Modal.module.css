@@ -1,0 +1,176 @@
+.backdrop {
+  z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: relative;
+  width: 600px;
+  max-width: 90%;
+  border-radius: 25px;
+  background-color: #fff;
+  padding: 27px 80px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.closeBtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: #000;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.closeBtn:hover {
+  border: none;
+  outline: none;
+  transform: scale(1.1);
+}
+
+.closeBtn:focus,
+.closeBtn:active {
+  border: none;
+  outline: none;
+  transform: scale(1);
+}
+
+.title {
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 28px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.label {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: #000;
+}
+
+.input {
+  font-family: var(--font-family);
+  border-radius: 10px;
+  width: 440px;
+  background: #e4e4e4;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ababab;
+  padding: 17px 20px;
+  margin-top: 15px;
+}
+
+.signUpBtn {
+  font-family: var(--font-family);
+  border-radius: 10px;
+  padding: 10px 30px;
+  width: 118px;
+  background: #ffb36c;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000;
+  margin-top: 35px;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+.question {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 10px;
+  color: #000;
+  margin-top: 15px;
+}
+
+.question a {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  font-weight: 500;
+  font-size: 10px;
+  color: #000;
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    width: 400px;
+    padding: 25px 45px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 17px;
+  }
+
+  .list {
+    gap: 25px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .input {
+    width: 310px;
+    font-size: 14px;
+    padding: 13px 20px;
+  }
+
+  .signUpBtn {
+    border-radius: 10px;
+    width: 107px;
+    font-size: 12px;
+    margin-top: 25px;
+  }
+
+  .question {
+    font-size: 8px;
+    margin-top: 17px;
+  }
+
+  .question a {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    border-radius: 10px;
+    width: 293px;
+    padding: 25px;
+  }
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .input {
+    width: 243px;
+    font-size: 12px;
+  }
+
+  .signUpBtn {
+    border-radius: 10px;
+    width: 107px;
+    margin-top: 15px;
+  }
+}
