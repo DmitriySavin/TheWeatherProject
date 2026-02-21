@@ -60,19 +60,17 @@ button:focus-visible {
   width: 100%;
   margin: 0 auto;
   padding: 0 15px;
+  max-width: 320px;
 
-  @media screen and (min-width: 290px) {
-      max-width: 290px;
+  @media screen and (min-width: 768px) {
+    max-width: 720px;
   }
 
-  @media screen and (min-width: 570px) {
-      max-width: 570px; 
-  }
-
-  @media screen and (min-width: 1140px) {
-      max-width: 1140px;
+  @media screen and (min-width: 1200px) {
+    max-width: 1140px;
   }
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {

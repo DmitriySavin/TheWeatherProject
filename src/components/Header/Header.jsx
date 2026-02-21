@@ -1,33 +1,84 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import logo from "../../assets/images/logo.png";
 import user from "../../assets/images/user.png";
 import s from "./Header.module.css";
 import Modal from "../Modal/Modal";
 import { IoMdClose } from "react-icons/io";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { MdModeEdit } from "react-icons/md";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "SUBMIT":
+      return {
+        ...state,
+        isSubmitted: true,
+        isModalOpen: false,
+      };
+    case "OPEN_MODAL":
+      return {
+        ...state,
+        isModalOpen: true,
+      };
+    case "ESC":
+      return {
+        ...state,
+        isModalOpen: false,
+      };
+    case "EDIT_MODAL":
+      return {
+        ...state,
+        isModalOpen: true,
+      };
+    case "MOBILE_OPEN":
+      return {
+        ...state,
+        isModalOpen: true,
+      };
+    case "CLOSE":
+      return {
+        ...state,
+        isModalOpen: false,
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const initialState = {
+    isSubmitted: false,
+    isModalOpen: false,
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [username, setUsername] = useLocalStorage("name", "");
+  const [email, setEmail] = useLocalStorage("email", "");
+  const [password, setPassword] = useLocalStorage("password", "");
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  function handleSubmit() {
-    setIsSubmitted(true);
-    setIsModalOpen(false);
+  function handleSubmit(e) {
+  e.preventDefault();
+
+  if (username.trim() !== "") {
+    dispatch({ type: "SUBMIT" });
   }
+}
+
 
   function closeMenu() {
-    setMenuVisible(false); // запускає анімацію зникнення
-    setTimeout(() => setIsBurgerOpen(false), 400); // видаляємо меню після анімації
+    setMenuVisible(false);
+    setTimeout(() => setIsBurgerOpen(false), 400);
   }
 
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
-        setIsModalOpen(false);
+        dispatch({ type: "ESC" });
         closeMenu();
       }
     }
@@ -43,7 +94,7 @@ export default function Header() {
 
   return (
     <header className={s.header}>
-      <div>
+      <div className="container">
         <div className={s.headerContainer}>
           <a href="#">
             <img src={logo} alt="Forecast" className={s.logo} />
@@ -70,12 +121,23 @@ export default function Header() {
           </nav>
 
           <div className={s.headerWrapper}>
-            {isSubmitted ? (
-              <h5 className={s.name}>Welcome, {username}</h5>
+            {state.isSubmitted ? (
+              <div className={s.userSub}>
+                <h5 className={s.name}>Welcome, {username}</h5>
+                <button
+                  onClick={() => {
+                    dispatch({ type: "EDIT_MODAL" });
+                    setIsEditing(true);
+                  }}
+                  className={s.edit}
+                >
+                  <MdModeEdit /> <span className="editSpan">Edit</span>
+                </button>
+              </div>
             ) : (
               <button
                 className={s.signUpBtn}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => dispatch({ type: "OPEN_MODAL" })}
               >
                 Sign Up
               </button>
@@ -147,13 +209,13 @@ export default function Header() {
           </div>
 
           <div className={s.menuFooter}>
-            {isSubmitted ? (
+            {state.isSubmitted ? (
               <h5 className={s.menuName}>Welcome, {username}</h5>
             ) : (
               <button
                 className={s.menuSignUpBtn}
                 onClick={() => {
-                  setIsModalOpen(true);
+                  dispatch({ type: "MOBILE_OPEN" });
                   closeMenu();
                 }}
               >
@@ -165,7 +227,7 @@ export default function Header() {
         </div>
       )}
 
-      {isModalOpen && (
+      {state.isModalOpen && (
         <Modal
           name={username}
           nameChange={(e) => setUsername(e.target.value)}
@@ -173,9 +235,13 @@ export default function Header() {
           emailChange={(e) => setEmail(e.target.value)}
           password={password}
           passwordChange={(e) => setPassword(e.target.value)}
-          close={() => setIsModalOpen(false)}
+          close={() => dispatch({ type: "CLOSE" })}
           onSubmit={handleSubmit}
           closeOnBackdrop={true}
+          edit={isEditing}
+          setUsername={setUsername}
+          setEmail={setEmail}
+          setPassword={setPassword}
         />
       )}
     </header>
