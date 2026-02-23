@@ -32,6 +32,7 @@ const Slider = () => {
 
   return (
     <section className={styles.gallery}>
+      <div className={styles.container}>
       <h2 className={styles.title}>Beautiful nature</h2>
 
       <div className={styles.slider}>
@@ -51,6 +52,7 @@ const Slider = () => {
             </div>
           );
         })}
+      </div>
       </div>
     </section>
   );
