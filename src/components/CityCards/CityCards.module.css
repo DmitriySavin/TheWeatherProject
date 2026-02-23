@@ -1,0 +1,150 @@
+.item {
+    border-radius: 20px;
+    width: 293px;
+    height: 392px;
+    background: #e8e8e8;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 15px;
+}
+
+.title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+}
+
+.time {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    padding-top: 15px;
+    color: #000;
+    text-align: center;
+}
+
+.buttonWrapper {
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 6px 6px;
+    width: 93px;
+    height: 23px;
+    background: #ffb36c;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 9px;
+    text-align: center;
+    color: #000;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.btnText {
+    min-width: 82px;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardImg {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.date {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 12px;
+    color: #000;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.temp {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 24px;
+    color: #000;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.menuWrapper {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.menuWrapperFrame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 860px) {
+    .item {
+        width: 293px;
+        height: 392px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .button {
+        /* width: 96px; */
+    }
+}
+
+@media screen and (min-width: 1170px) {
+    .item {
+        width: 320px;
+        height: 430px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    .time {
+        font-size: 24px;
+    }
+
+    .button {
+        border-radius: 10px;
+        width: 114px;
+        height: 28px;
+        font-size: 10px;
+    }
+
+    .date {
+        font-size: 14px;
+    }
+
+    .temp {
+        font-size: 32px;
+    }
+}
+
+.iconBtn {}

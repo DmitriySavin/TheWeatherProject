@@ -11,9 +11,6 @@ const fetcharticleApi = (name) => {
       }
       return res.json();
     })
-    .catch((error) => {
-      console.log(error);
-    });
 };
 
 export default fetcharticleApi;

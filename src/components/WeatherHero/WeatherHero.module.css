@@ -11,6 +11,7 @@
     url(../../image/mainsect-bg.jpg);
   background-size: cover;
   background-position: center;
+  margin-bottom: 60px;
 }
 
 .content {
@@ -89,6 +90,12 @@
   color: #000;
 }
 
+.list {
+  display: flex;
+  column-gap: 90px;
+      justify-content: center;
+}
+
 @media (max-width: 1024px) {
   .hero {
     height: 345px;
@@ -116,7 +123,7 @@
   .info {
     display: flex;
     margin: 0;
-    margin-right: 32px
+    margin-right: 32px;
   }
 
   .desc {
@@ -187,7 +194,6 @@
     width: 260px;
   }
 
-
   .divider {
     position: absolute;
     left: 0;
@@ -227,4 +233,7 @@
     height: 28px;
     padding: 0 14px;
   }
+    /* .list {
+      justify-content: center;
+    } */
 }
