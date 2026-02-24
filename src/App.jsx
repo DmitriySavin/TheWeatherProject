@@ -1,16 +1,17 @@
 import "./App.css";
-import Slider from './components/Slider/Slider'
+import { ToastContainer } from "react-toastify";
+import Header from "./components/Header/Header";
 
 function App() {
-  return (<>
-  <Slider />
-  </>);
+  return (
+    <>
+      <Header />
+      <ToastContainer position="top-center" autoClose={1000} />
+    </>
+  );
 }
 
 export default App;
-
-
-
 
 
 // import "./App.css";
