@@ -69,7 +69,7 @@
 .input {
   font-family: var(--font-family);
   border-radius: 10px;
-  width: 100%;
+  width: 440px;
   background: #e4e4e4;
   font-weight: 500;
   font-size: 14px;
@@ -79,7 +79,7 @@
 }
 
 .signUpBtn {
- font-family: var(--font-family);
+  font-family: var(--font-family);
   border-radius: 10px;
   padding: 10px 30px;
   width: 118px;
@@ -88,19 +88,6 @@
   font-size: 14px;
   color: #000;
   margin-top: 35px;
-  transition: transform 0.3s ease;
-  transition-delay: 0.05s;
-}
-
-.signUpBtn:hover,
-.signUpBtn:focus,
-.signUpBtn:active {
-  border: none;
-  outline: none;
-}
-
-.signUpBtn:hover {
-  transform: scale(1.1);
 }
 
 .wrapper {
@@ -143,13 +130,14 @@
   }
 
   .input {
+    width: 310px;
     font-size: 14px;
     padding: 13px 20px;
   }
 
   .signUpBtn {
     border-radius: 10px;
-    width: 110px;
+    width: 107px;
     font-size: 12px;
     margin-top: 25px;
   }
@@ -176,11 +164,13 @@
   }
 
   .input {
+    width: 243px;
     font-size: 12px;
   }
 
   .signUpBtn {
     border-radius: 10px;
+    width: 107px;
     margin-top: 15px;
   }
 }
