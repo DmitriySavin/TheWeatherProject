@@ -1,33 +1,68 @@
-import { useEffect, useState } from "react";
+import { useState, useReducer, useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+import useLocalStorage from "../hooks/modalLocaleStorage"; // твой хук
+import Modal from "../Modal/Modal"; // твой компонент модалки
+import s from "./Header.module.css";
 import logo from "../../assets/images/logo.png";
 import user from "../../assets/images/user.png";
-import s from "./Header.module.css";
-import Modal from "../Modal/Modal";
-import { IoMdClose } from "react-icons/io";
+
+// пример reducer для состояния
+function reducer(state, action) {
+  switch (action.type) {
+    case "SUBMIT":
+      return { ...state, isSubmitted: true };
+    case "OPEN_MODAL":
+      return { ...state, isModalOpen: true };
+    case "CLOSE":
+      return { ...state, isModalOpen: false };
+    case "ESC":
+      return { ...state, isModalOpen: false };
+    case "EDIT_MODAL":
+      return { ...state, isModalOpen: true };
+    case "MOBILE_OPEN":
+      return { ...state, isModalOpen: true };
+    default:
+      return state;
+  }
+}
 
 export default function Header() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const initialState = {
+    isSubmitted: false,
+    isModalOpen: false,
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const [username, setUsername] = useLocalStorage("name", "");
+  const [email, setEmail] = useLocalStorage("email", "");
+  const [password, setPassword] = useLocalStorage("password", "");
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
-  function handleSubmit() {
-    setIsSubmitted(true);
-    setIsModalOpen(false);
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (username.trim() !== "") {
+      dispatch({ type: "SUBMIT" });
+    }
+  }
+
+  function openMenu() {
+    setIsBurgerOpen(true);
+    setTimeout(() => setMenuVisible(true), 10);
   }
 
   function closeMenu() {
-    setMenuVisible(false); // запускає анімацію зникнення
-    setTimeout(() => setIsBurgerOpen(false), 400); // видаляємо меню після анімації
+    setMenuVisible(false);
+    setTimeout(() => setIsBurgerOpen(false), 400);
   }
 
   useEffect(() => {
     function handleKeyDown(e) {
       if (e.key === "Escape") {
-        setIsModalOpen(false);
+        dispatch({ type: "ESC" });
         closeMenu();
       }
     }
@@ -35,11 +70,6 @@ export default function Header() {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
-
-  function openMenu() {
-    setIsBurgerOpen(true);
-    setTimeout(() => setMenuVisible(true), 10); // щоб запустити анімацію
-  }
 
   return (
     <header className={s.header}>
@@ -70,12 +100,23 @@ export default function Header() {
           </nav>
 
           <div className={s.headerWrapper}>
-            {isSubmitted ? (
-              <h5 className={s.name}>Welcome, {username}</h5>
+            {state.isSubmitted ? (
+              <div className={s.userSub}>
+                <h5 className={s.name}>Welcome, {username}</h5>
+                <button
+                  onClick={() => {
+                    dispatch({ type: "EDIT_MODAL" });
+                    setIsEditing(true);
+                  }}
+                  className={s.edit}
+                >
+                  <MdModeEdit /> <span className="editSpan">Edit</span>
+                </button>
+              </div>
             ) : (
               <button
                 className={s.signUpBtn}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => dispatch({ type: "OPEN_MODAL" })}
               >
                 Sign Up
               </button>
@@ -98,7 +139,7 @@ export default function Header() {
                 <path
                   d="M0.5 8.98529L4.74264 4.74265L0.5 0.500009"
                   stroke="black"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
             ) : (
@@ -112,7 +153,7 @@ export default function Header() {
                 <path
                   d="M0.5 0.5L4.74264 4.74264L8.98528 0.5"
                   stroke="black"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 />
               </svg>
             )}
@@ -147,25 +188,24 @@ export default function Header() {
           </div>
 
           <div className={s.menuFooter}>
-            {isSubmitted ? (
+            {state.isSubmitted ? (
               <h5 className={s.menuName}>Welcome, {username}</h5>
             ) : (
               <button
                 className={s.menuSignUpBtn}
                 onClick={() => {
-                  setIsModalOpen(true);
+                  dispatch({ type: "MOBILE_OPEN" });
                   closeMenu();
                 }}
               >
                 Sign Up
               </button>
             )}
-            <img src={user} alt="User" className={s.menuUserImg} />
           </div>
         </div>
       )}
 
-      {isModalOpen && (
+      {state.isModalOpen && (
         <Modal
           name={username}
           nameChange={(e) => setUsername(e.target.value)}
@@ -173,9 +213,13 @@ export default function Header() {
           emailChange={(e) => setEmail(e.target.value)}
           password={password}
           passwordChange={(e) => setPassword(e.target.value)}
-          close={() => setIsModalOpen(false)}
+          close={() => dispatch({ type: "CLOSE" })}
           onSubmit={handleSubmit}
           closeOnBackdrop={true}
+          edit={isEditing}
+          setUsername={setUsername}
+          setEmail={setEmail}
+          setPassword={setPassword}
         />
       )}
     </header>
