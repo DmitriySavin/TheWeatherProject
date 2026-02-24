@@ -1,7 +1,10 @@
 import "./App.css";
+import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 
 function App() {
-  return <></>;
+  return <>
+  <WeeklyForecast />
+  </>;
 }
 
 export default App;
