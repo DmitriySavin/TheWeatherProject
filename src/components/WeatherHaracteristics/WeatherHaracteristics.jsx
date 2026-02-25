@@ -10,12 +10,6 @@ export class WeatherHaracteristics extends Component {
     articles: [],
   };
 
-  // changeInput = (value) => {
-  //   this.setState({
-  //     name: this.props.name,
-  //   });
-  // };
-
   handleSubmit = (event) => {
     event.preventDefault();
 
