@@ -48,6 +48,8 @@ p {
 ul,
 ul li {
   list-style: none;
+  padding: 0px;
+  margin: 0px;
 }
 
 img {
@@ -112,17 +114,15 @@ input[type="file"] {
 
 .container {
   width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  max-width: 1440px;
+margin: 0 auto;
+  padding: 0 150px;
 }
-
+/* 
 .container {
   width: 100%;
   max-width: 293px;
-}
+} */
 
 @media screen and (max-width: 768px) {
   .container {
