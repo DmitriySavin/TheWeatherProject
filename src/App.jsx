@@ -1,12 +1,23 @@
+
+import './App.css'
+import { WeatherHaracteristics } from './components/WeatherHaracteristics/WeatherHaracteristics'
+import WeatherHero from './components/WeatherHero/WeatherHero'
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/Header/Header";
+import WeatherHero from './components/WeatherHero/WeatherHero';
+
 
 function App() {
   return (
     <>
+
+      <WeatherHero />
+
       <Header />
+      <WeatherHero />
       <ToastContainer position="top-center" autoClose={1000} />
+
     </>
   );
 }

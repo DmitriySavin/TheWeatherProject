@@ -92,8 +92,10 @@
 
 .list {
   display: flex;
-  column-gap: 90px;
-      justify-content: center;
+  row-gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 @media (max-width: 1024px) {
@@ -159,6 +161,12 @@
 
   .searchBtn {
     padding: 0 20px;
+  }
+  .list {
+    flex-direction: inherit;
+    row-gap: 30px;
+    column-gap: 30px;
+    flex-wrap: wrap;
   }
 }
 
@@ -233,7 +241,4 @@
     height: 28px;
     padding: 0 14px;
   }
-    /* .list {
-      justify-content: center;
-    } */
 }
