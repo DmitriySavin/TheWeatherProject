@@ -2,6 +2,10 @@ import styles from "./WeatherHero.module.css";
 import { IoSearchSharp } from "react-icons/io5";
 import fetcharticleApi from "../../services/citysearch";
 import { useState } from "react";
+import { CityCards } from "../CityCards/CityCards";
+import { WeatherHaracteristics } from "../WeatherHaracteristics/WeatherHaracteristics";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function WeatherHero() {
   const d = new Date();
@@ -17,6 +21,9 @@ export default function WeatherHero() {
   const [name, setName] = useState("");
   const [articles, setArticles] = useState([]);
 
+  // для везерХарактеристик
+  const [selectedId, setSelectedId] = useState(null);
+
   const changeName = (name) => {
     setName(name);
   };
@@ -28,6 +35,31 @@ export default function WeatherHero() {
       setName(""),
     );
   };
+
+  // для везерХарактеристик
+  const toggleHaracteristics = (id) => {
+    setSelectedId((prev) => (prev === id ? null : id));
+  };
+
+  const getWeatherData = () => {
+    return articles.map((article) => ({
+      feelsLike: article.feelsLike,
+      temp: article.main.temp,
+      minTemp: article.main.temp_min,
+      maxTemp: article.main.temp_max,
+      humidity: article.main.humidity,
+      pressure: article.main.pressure,
+      windSpeed: article.wind.speed,
+      icon: article.weather[0].icon,
+      visibility:
+        article.visibility >= 10000
+          ? "Unlimited"
+          : `${article.visibility / 1000} km`,
+      id: article.id,
+    }));
+  };
+
+  const data = getWeatherData();
 
   return (
     <section className={styles.hero}>
@@ -49,6 +81,28 @@ export default function WeatherHero() {
           </h3>
         </div>
 
+      <>
+        <ul className={styles.list}>
+          {articles.map((article) => (
+            <CityCards
+              key={article.id}
+              article={article}
+              filteredArticles={filteredArticles}
+              id={article.id}
+              handleRefresh={handleRefresh}
+              toggleHaracteristics={toggleHaracteristics}
+            />
+          ))}
+        </ul>
+
+{selectedId && (
+  <WeatherHaracteristics
+    data={data.find((item) => item.id === selectedId)}
+  />
+)}
+        <ToastContainer />
+      </>
+
         <form className={styles.search} onSubmit={handleSubmit}>
           <input
             type="text"
@@ -62,5 +116,7 @@ export default function WeatherHero() {
         </form>
       </div>
     </section>
+
   );
 }
+  
