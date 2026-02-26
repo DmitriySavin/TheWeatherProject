@@ -1,34 +1,33 @@
-import styles from "../../components/CityCards/CityCards.module.css";
-
-import { FaRedoAlt } from "react-icons/fa";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { FaTrashAlt } from "react-icons/fa";
+import styles from "./CityCards.module.css";
+import { FaRedoAlt, FaRegHeart, FaHeart, FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
 
-export const CityCards = ({ article, filteredArticles, id, handleRefresh }) => {
+export const CityCards = ({
+  article,
+  filteredArticles,
+  id,
+  handleRefresh,
+  toggleHaracteristics,
+}) => {
   const [heart, setHeart] = useState(false);
 
   const formatDateTime = (timestamp, timezone) => {
     const date = new Date((timestamp + timezone) * 1000);
-
     const time = date.toLocaleTimeString("uk-UA", {
       hour: "2-digit",
       minute: "2-digit",
       timeZone: "UTC",
     });
-
     const fullDate = date.toLocaleDateString("uk-UA", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
       timeZone: "UTC",
     });
-
     const weekday = date.toLocaleDateString("en-US", {
       weekday: "long",
       timeZone: "UTC",
     });
-
     return { time, fullDate, weekday };
   };
 
@@ -36,14 +35,10 @@ export const CityCards = ({ article, filteredArticles, id, handleRefresh }) => {
     article.dt,
     article.timezone,
   );
-
   const iconCode = article.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-  const toggleHeart = () => {
-    setHeart(!heart);
-  };
-
+  const toggleHeart = () => setHeart(!heart);
   const name = article.name;
 
   return (
@@ -54,6 +49,7 @@ export const CityCards = ({ article, filteredArticles, id, handleRefresh }) => {
       </div>
 
       <p className={styles.time}>{time}</p>
+
       <div className={styles.buttonWrapper}>
         <button type="button" className={styles.button}>
           <p className={styles.btnText}>Hourly forecast</p>
@@ -64,20 +60,21 @@ export const CityCards = ({ article, filteredArticles, id, handleRefresh }) => {
       </div>
 
       <p className={styles.date}>
-        {fullDate} | {weekday}{" "}
+        {fullDate} | {weekday}
       </p>
+
       <div className={styles.cardContent}>
         <img src={iconUrl} alt="weather icon" className={styles.cardImg} />
       </div>
 
       <p className={styles.temp}>{article.main.temp}℃</p>
+
       <div className={styles.menuWrapper}>
         <div className={styles.menuWrapperFrame}>
-          <FaRedoAlt
-            size={20}
-            color="black"
-            onClick={() => handleRefresh(id, name)}
-          />
+          <button type="button" onClick={() => handleRefresh(id, name)}>
+            <FaRedoAlt size={20} color="black" />
+          </button>
+
           <button
             type="button"
             onClick={toggleHeart}
@@ -90,9 +87,14 @@ export const CityCards = ({ article, filteredArticles, id, handleRefresh }) => {
             )}
           </button>
         </div>
+
         <div className={styles.menuWrapperFrame}>
-          <button type="button" className={styles.button}>
-            See more{" "}
+          <button
+            type="button"
+            onClick={() => toggleHaracteristics(article.id)}
+            className={styles.button}
+          >
+            See more
           </button>
           <button type="button" onClick={() => filteredArticles(id)}>
             <FaTrashAlt size={20} color="black" />

@@ -91,9 +91,15 @@
 }
 
 .list {
+  /* display: flex;
+  column-gap: 90px;
+justify-content: center; */
   display: flex;
   column-gap: 90px;
-      justify-content: center;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0;
+  flex-direction: inherit;
 }
 
 @media (max-width: 1024px) {
@@ -159,6 +165,11 @@
 
   .searchBtn {
     padding: 0 20px;
+  }
+  .list {
+    column-gap: 30px;
+    row-gap: 0;
+    flex-direction: inherit;
   }
 }
 
@@ -233,7 +244,9 @@
     height: 28px;
     padding: 0 14px;
   }
-    /* .list {
-      justify-content: center;
-    } */
+  .list {
+    row-gap: 30px;
+    column-gap: 0;
+    flex-direction: column;
+  }
 }

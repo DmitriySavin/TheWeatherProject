@@ -27,8 +27,8 @@ export const WeatherHaracteristics = ({ data }) => {
           <li key={`${data.id}--3`} className={styles.item}>
             <p className={styles.itemTitle}>Humidity</p>
             <p className={styles.itemText}>{data.humidity}%</p>
-            <div className={styles.wrapperImg}>
-              <img src={iconUrl} alt="Погода" className={styles.secongImg} />
+            <div className={styles.secongImg}>
+              <img src={iconUrl} alt="Погода"  />
             </div>
           </li>
           <li key={`${data.id}--4`} className={styles.item}>
