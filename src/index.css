@@ -58,25 +58,30 @@ button:focus-visible {
 } */
 
 .container {
-  width: 100%;
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 960px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .container {
-    width: 100%;
-    max-width: 569px;
+    max-width: 768px; /* Збільшено для кращого вигляду */
   }
 }
 
 @media screen and (max-width: 480px) {
   .container {
-    width: 100%;
-    max-width: 293px;
+    max-width: 480px; /* На мобільних займає всю ширину мінус падінги */
   }
 }
+
 
 
 @media (prefers-color-scheme: light) {
