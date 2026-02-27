@@ -91,7 +91,7 @@ button:focus {
 }
 
 .menuWrapper {
-    margin-top: 25px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -147,4 +147,3 @@ button:focus {
     }
 }
 
-.iconBtn {}
