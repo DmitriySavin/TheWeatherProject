@@ -4,6 +4,7 @@ import fetcharticleApi from "../../services/citysearch";
 import { useState } from "react";
 import { CityCards } from "../CityCards/CityCards";
 import { WeatherHaracteristics } from "../WeatherHaracteristics/WeatherHaracteristics";
+import { WeatherChart } from "../LineChart/LineChart_component";
 import { ToastContainer, toast, Slide  } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,7 +50,7 @@ export default function WeatherHero() {
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Slide ,
+        transition: Slide,
       });
     }
   };
@@ -87,7 +88,7 @@ export default function WeatherHero() {
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Slide ,
+        transition: Slide,
       });
     } catch (error) {
       toast.error("Failed to refresh city", {
@@ -99,7 +100,7 @@ export default function WeatherHero() {
         draggable: true,
         progress: undefined,
         theme: "light",
-        transition: Slide ,
+        transition: Slide,
       });
     }
   };
@@ -115,6 +116,7 @@ export default function WeatherHero() {
   const getWeatherData = () =>
     articles.map((article) => ({
       id: article.id ?? article.dt,
+      name: article.name, // <-- обязательно!
       feelsLike: article.main?.feels_like ?? "-",
       temp: article.main?.temp ?? "-",
       minTemp: article.main?.temp_min ?? "-",
@@ -179,8 +181,12 @@ export default function WeatherHero() {
           />
         ))}
       </ul>
-
-      {selectedData && <WeatherHaracteristics data={selectedData} />}
+      {selectedData && (
+        <>
+          <WeatherHaracteristics data={selectedData} />
+          <WeatherChart name={selectedData.name} />
+        </>
+      )}
     </>
   );
 }
