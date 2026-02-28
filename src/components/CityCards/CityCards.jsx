@@ -1,6 +1,7 @@
 import styles from "./CityCards.module.css";
 import { FaRedoAlt, FaRegHeart, FaHeart, FaTrashAlt } from "react-icons/fa";
 import { useState } from "react";
+import WeeklyForecast from "../WeeklyForecast/WeeklyForecast";
 
 export const CityCards = ({
   article,
@@ -8,6 +9,7 @@ export const CityCards = ({
   id,
   handleRefresh,
   toggleHaracteristics,
+  showForecast,
 }) => {
   const [heart, setHeart] = useState(false);
 
@@ -54,7 +56,11 @@ export const CityCards = ({
         <button type="button" className={styles.button}>
           <p className={styles.btnText}>Hourly forecast</p>
         </button>
-        <button type="button" className={styles.button}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={() => showForecast(article.name)}
+        >
           <p className={styles.btnText}>Weekly forecast</p>
         </button>
       </div>

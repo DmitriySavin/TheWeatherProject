@@ -5,7 +5,8 @@ import { useState } from "react";
 import { CityCards } from "../CityCards/CityCards";
 import { WeatherHaracteristics } from "../WeatherHaracteristics/WeatherHaracteristics";
 import { WeatherChart } from "../LineChart/LineChart_component";
-import { ToastContainer, toast, Slide  } from "react-toastify";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import WeeklyForecast from "../WeeklyForecast/WeeklyForecast";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function WeatherHero() {
@@ -23,6 +24,11 @@ export default function WeatherHero() {
   const [name, setName] = useState("");
   const [articles, setArticles] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
+  const [weeklyForecast, setForecast] = useState(null);
+
+  const showForecast = (name) => {
+    setForecast((prev) => (prev === name ? null : name));
+  };
 
   // Добавление нового города
   const handleSubmit = async (event) => {
@@ -178,6 +184,7 @@ export default function WeatherHero() {
             toggleHaracteristics={toggleHaracteristics}
             handleRefresh={handleRefresh}
             selectedId={selectedId}
+            showForecast={showForecast}
           />
         ))}
       </ul>
@@ -187,6 +194,8 @@ export default function WeatherHero() {
           <WeatherChart name={selectedData.name} />
         </>
       )}
+
+      {weeklyForecast && <WeeklyForecast city={weeklyForecast} />}
     </>
   );
 }
