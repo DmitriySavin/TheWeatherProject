@@ -7,25 +7,24 @@ import logo from "../../assets/logo.png";
 const Footer = () => {
   return (
     <footer className={style.footer}>
-          <div className={style.container}>
-              <div>
-                  <div className={style.logoBlock}>
-          <a href="#" className={style.logoFooter}>
-            <img src={logo} alt="Logo" className={style.logo} />
-          </a>
-        </div>
+      <div className={style.container}>
+        <div className={style.footerBlock}>
+          <div className={style.logoBlock}>
+            <a href="#" className={style.logoFooter}>
+              <img src={logo} alt="Logo" className={style.logo} />
+            </a>
+          </div>
 
-        <div className={style.addressBlock}>
-          <h4 className={style.title}>Address</h4>
-          <p className={style.text}>
-            <span className={style.noWrap}>Svobody str. 35</span>
-            <br />
-            Kyiv <br />
-            Ukraine
-          </p>
+          <div className={style.addressBlock}>
+            <h4 className={style.title}>Address</h4>
+            <p className={style.text}>
+              <span className={style.noWrap}>Svobody str. 35</span>
+              <br />
+              Kyiv <br />
+              Ukraine
+            </p>
+          </div>
         </div>
-              </div>
-        
 
         <div className={style.socialBlock}>
           <h4 className={style.title}>Contact us</h4>
