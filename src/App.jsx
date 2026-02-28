@@ -1,11 +1,12 @@
-import './App.css'
-import WeatherHero from './components/WeatherHero/WeatherHero'
+import "./App.css";
+import WeatherHero from "./components/WeatherHero/WeatherHero";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/Header/Header";
 import Slider from "./components/Slider/Slider";
 import News from "./components/News/News";
-import WeeklyForecast from './components/WeeklyForecast/WeeklyForecast';
+import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <WeeklyForecast />
         <News />
         <Slider />
-        <ToastContainer position="top-center" autoClose={1000} />
       </div>
+      <Footer />
+      <ToastContainer position="top-center" autoClose={1000} />
     </>
   );
 }

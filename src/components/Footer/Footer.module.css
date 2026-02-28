@@ -1,0 +1,149 @@
+.footer {
+    width: 100%;
+    background-color: #EDA867;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1120px;
+    padding: 25px 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logoBlock {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 70px;
+    position: relative;
+    transform: translate(-100px, 105px);
+}
+
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+
+.addressBlock {
+    margin-bottom: 35px;
+    text-align: start;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: start;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.socialBlock {
+    width: 100%;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    cursor: pointer;
+}
+.logoFooter {
+        width: 80px;
+            height: 80px;
+            display: block;
+}
+
+@media (min-width: 860px) {
+
+    .container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        text-align: left;
+        padding: 40px 60px;
+        gap: 120px;
+    }
+
+    .logoBlock,
+    .addressBlock,
+    .socialBlock {
+        margin-bottom: 0;
+    }
+
+    .logo {
+        position: static;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+
+    .title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+
+    .icons {
+        justify-content: flex-start;
+        gap: 18px;
+    }
+
+    .icon {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (min-width: 1120px) {
+
+    .container {
+        padding-top: 35px;
+        padding-bottom: 35px;
+        padding-left: 100px;
+        padding-right: 40px;
+        gap: 180px;
+    }
+
+    .logo {
+        transform: none;
+    }
+
+    .title {
+        font-size: 19px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+
+    .icons {
+        gap: 22px;
+    }
+
+    .icon {
+        width: 42px;
+        height: 42px;
+    }
+}
